@@ -28,3 +28,9 @@ Se aplican también conocimientos básicos de Tailwind.
 
 ##Modelos
 Interactúan con las tablas de la base de datos.
+
+##Autenticación
+Comandos: 
+- composer update
+- composer require laravel/breeze
+

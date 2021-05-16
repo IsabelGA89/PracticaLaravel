@@ -78,7 +78,7 @@ class FacturasController extends Controller
     public function show(facturas $facturas)
     {
         //
-        return view('facturas.show',compact('facturas'));
+        //return view('facturas.show');
     }
 
     /**
@@ -126,9 +126,9 @@ class FacturasController extends Controller
      * @param  \App\facturas  $facturas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(facturas $factura)
+    public function destroy(facturas $facturas)
     {
-        $factura->delete();
+        $facturas->delete();
         return view("facturas.index");
     }
 }
