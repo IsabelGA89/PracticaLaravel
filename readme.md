@@ -33,4 +33,5 @@ Interactúan con las tablas de la base de datos.
 Comandos: 
 - composer update
 - composer require laravel/breeze
+- php artisan breeze:install
 
