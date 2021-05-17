@@ -36,7 +36,7 @@ Comandos:
 - composer require laravel/breeze
 - php artisan breeze:install
 npm install
-npm run
+npm run dev
 
 ** nota: recomendable modificar fichero package.json para añadir en 
 "dev": "npm run development -- --watch" el watch y npm run watch &

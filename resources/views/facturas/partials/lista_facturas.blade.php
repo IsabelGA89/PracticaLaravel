@@ -8,47 +8,49 @@
         <p>{{ $message }}</p>
     </div>
 @endif
-<h1 class="text-4xl text-center font-bold m-5">
-    Facturas
-    <div class="w-full py-3">
-        <button type="button"
-                class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400">
-            <a href="{{route('facturas.create')}}">Crear Nueva factura</a>
-        </button>
-    </div>
-</h1>
-<div>
-    <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800 text-gray-200">
-        <tr class="text-left border-b border-gray-300">
-            <th class="px-4 py-3">Empresa</th>
-            <th class="px-4 py-3">Producto</th>
-            <th class="px-4 py-3">Unidades</th>
-            <th class="px-4 py-3">Total</th>
-            <th class="px-4 py-3">Impuesto</th>
-            <th class="px-4 py-3 text-center">Acciones</th>
-        </tr>
-        @foreach($fras as $fra)
-            <tr class="bg-gray-700 border-b border-gray-600">
-                <td class="px-4 py-3">{{$fra->empresa}}</td>
-                <td class="px-4 py-3">{{$fra->producto}}</td>
-                <td class="px-4 py-3">{{$fra->unidades}}</td>
-                <td class="px-4 py-3">{{$fra->total}}</td>
-                <td class="px-4 py-3">{{$fra->impuesto}}</td>
-                <td class="px-4 py-3 text-center">
-                    <div class="inline-block mr-2 mt-2">
-                        <form action="{{ route('facturas.destroy',$fra) }}" method="Post">
-                            <a class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400"
-                               href="{{ route('facturas.edit',$fra) }}">Modificar</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400">
-                                Eliminar
-                            </button>
-                        </form>
-                    </div>
-                </td>
+
+<div class="mb-auto">
+    <h1 class="text-4xl text-center font-bold m-5">
+        Facturas
+        <div class="w-full py-3">
+            <button type="button"
+                    class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400">
+                <a href="{{route('facturas.create')}}">Crear Nueva factura</a>
+            </button>
+        </div>
+    </h1>
+    <div>
+        <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800 text-gray-200">
+            <tr class="text-left border-b border-gray-300">
+                <th class="px-4 py-3">Empresa</th>
+                <th class="px-4 py-3">Producto</th>
+                <th class="px-4 py-3">Unidades</th>
+                <th class="px-4 py-3">Total</th>
+                <th class="px-4 py-3">Impuesto</th>
+                <th class="px-4 py-3 text-center">Acciones</th>
             </tr>
-    @endforeach
+            @foreach($fras as $fra)
+                <tr class="bg-gray-700 border-b border-gray-600">
+                    <td class="px-4 py-3">{{$fra->empresa}}</td>
+                    <td class="px-4 py-3">{{$fra->producto}}</td>
+                    <td class="px-4 py-3">{{$fra->unidades}}</td>
+                    <td class="px-4 py-3">{{$fra->total}}</td>
+                    <td class="px-4 py-3">{{$fra->impuesto}}</td>
+                    <td class="px-4 py-3 text-center">
+                        <div class="inline-block mr-2 mt-2">
+                            <form action="{{ route('facturas.destroy', $fra->id) }}" method="POST">
+                                <a class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400"
+                                   href="{{ route('facturas.edit',$fra->id) }}">Modificar</a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400"
+                                        type="submit"> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+        @endforeach
+    </div>
 </div>
 

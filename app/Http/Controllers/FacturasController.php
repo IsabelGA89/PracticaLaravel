@@ -126,9 +126,10 @@ class FacturasController extends Controller
     public function destroy(facturas $facturas)
     {
         try{
+            $fra_id = $facturas->id;
             $facturas->delete();
             return redirect()->route('facturas.index')
-                ->with('success','La factura se ha eliminado satisfactoriamente');
+                ->with('success',"La factura $fra_id se ha eliminado satisfactoriamente");
         }
         catch(\Exception $e){
             return redirect()->route('facturas.index')

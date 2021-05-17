@@ -14,7 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
+});
+
+//Vistas Básicas
+Route::view("personal","quiensoy");
+Route::view("inicio","inicio");
+Route::view("contacta","general.contacta");
+
+//Resources:
+Route::resource("facturas",FacturasController::class);
+Route::resource("clientes",ClientesController::class);
+Route::resource("empleados",EmpleadoController::class);
+Route::resource("idiomas",IdiomasController::class);
+
+
+//Para rutas que no existen
+Route::fallback(function(){
+    return view('errors.404');
 });
 
 Route::get('/dashboard', function () {

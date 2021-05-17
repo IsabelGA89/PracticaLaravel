@@ -18,6 +18,7 @@
             <div class="w-full px-24 z-10">
                 <h1 class="text-5xl font-bold text-left tracking-wide">Bienvenid@</h1>
                 <p class="text-3xl my-4">Debes estar registrado para acceder.</p>
+                <p class="text-3xl my-4">Aunque puedes hacer trampas y añadir /facturas a la url.</p>
             </div>
             <div class="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4">
                 <span>
@@ -49,29 +50,30 @@
                     <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">G+</span>
                     <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">in</span>
                 </div>
-                <p class="text-gray-100">
+                {{--<p class="text-gray-100">
                     Utiliza tu dirección de email
-                </p>
-                <form action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
-                    <div class="pb-2 pt-4">
-                        <input type="email" name="email" id="email" placeholder="Email"
-                               class="block w-full p-4 text-lg rounded-sm bg-black">
+                </p>--}}
+                <form method="POST" action="{{ route('login') }}" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    @csrf
+                   {{-- <div class="pb-2 pt-4">
+                        <input type="email"  id="email" placeholder="Email"
+                               class="block w-full p-4 text-lg rounded-sm bg-black" name="email" :value="old('email')" required autofocus>
                     </div>
                     <div class="pb-2 pt-4">
                         <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password"
-                               id="password" placeholder="Contraseña">
+                               id="password" placeholder="Contraseña" required autocomplete="current-password" >
                     </div>
                     <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
-                        <a href="#">¿Has olvidado la contraseña?</a>
-                    </div>
+                        <a href="">¿Has olvidado la contraseña?</a>
+                    </div>--}}
                     <div class="px-4 pb-2 pt-4">
                         <button class="uppercase w-1/2 p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
-                            Iniciar sesión
+                            <a href="{{route('login')}}">{{ __('Log in') }}</a>
                         </button>
                     </div>
                     <div class="px-4 pb-2 pt-4">
                         <button class=" uppercase w-1/2 p-2 text-lg rounded-full bg-green-500 hover:bg-green-600 focus:outline-none">
-                            Registrarse
+                            <a href="{{route('register')}}">{{ __('Register') }}</a>
                         </button>
                     </div>
 
