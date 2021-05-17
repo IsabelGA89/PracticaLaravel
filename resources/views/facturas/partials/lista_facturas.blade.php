@@ -13,7 +13,7 @@
     <div class="w-full py-3">
         <button type="button"
                 class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400">
-            <a href="{{route('facturas.create')}}">Crear Nuevo cliente</a>
+            <a href="{{route('facturas.create')}}">Crear Nueva factura</a>
         </button>
     </div>
 </h1>
@@ -36,20 +36,17 @@
                 <td class="px-4 py-3">{{$fra->impuesto}}</td>
                 <td class="px-4 py-3 text-center">
                     <div class="inline-block mr-2 mt-2">
-                        <button type="button"
-                                class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400">
-                            <a href="{{route('facturas.update',$fra->id)}}"> Modificar</a>
-                        </button>
+                        <form action="{{ route('facturas.destroy',$fra) }}" method="Post">
+                            <a class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400"
+                               href="{{ route('facturas.edit',$fra) }}">Modificar</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400">
+                                Eliminar
+                            </button>
+                        </form>
                     </div>
-
-                    <div class="inline-block mr-2 mt-2">
-
-                        <button type="button"
-                                class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400">
-                            <a href="{{route('facturas.destroy',$fra->id)}}"> Eliminar </a>
-                        </button>
-                    </div>
-
                 </td>
             </tr>
     @endforeach

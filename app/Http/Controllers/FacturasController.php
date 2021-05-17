@@ -64,9 +64,6 @@ class FacturasController extends Controller
                 ->with('error','Se ha producido un error guardando la factura.');
         }
 
-
-
-
     }
 
     /**
@@ -89,7 +86,7 @@ class FacturasController extends Controller
      */
     public function edit(facturas $facturas)
     {
-        return view('facturas.edit',["facturas",$facturas]);
+        return view('facturas.edit',compact('facturas'));
     }
 
     /**
@@ -128,7 +125,15 @@ class FacturasController extends Controller
      */
     public function destroy(facturas $facturas)
     {
-        $facturas->delete();
-        return view("facturas.index");
+        try{
+            $facturas->delete();
+            return redirect()->route('facturas.index')
+                ->with('success','La factura se ha eliminado satisfactoriamente');
+        }
+        catch(\Exception $e){
+            return redirect()->route('facturas.index')
+                ->with('error','La factura no ha podido ser eliminada');
+        }
+
     }
 }

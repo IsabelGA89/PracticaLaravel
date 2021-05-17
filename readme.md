@@ -30,8 +30,16 @@ Se aplican también conocimientos básicos de Tailwind.
 Interactúan con las tablas de la base de datos.
 
 ##Autenticación
+Documentacion Oficial: https://packagist.org/packages/laravel/breeze
 Comandos: 
 - composer update
 - composer require laravel/breeze
 - php artisan breeze:install
+npm install
+npm run
+
+** nota: recomendable modificar fichero package.json para añadir en 
+"dev": "npm run development -- --watch" el watch y npm run watch &
+
+
 

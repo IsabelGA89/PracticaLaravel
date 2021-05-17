@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,24 +13,12 @@
 |
 */
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Vistas Básicas
-Route::view("personal","quiensoy");
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-//Resources:
-Route::resource("facturas",FacturasController::class);
-Route::resource("clientes",ClientesController::class);
-Route::resource("empleados",EmpleadoController::class);
-Route::resource("idiomas",IdiomasController::class);
-
-
-//Para rutas que no existen
-Route::fallback(function(){
-    return view('errors.404');
-});
+require __DIR__.'/auth.php';
