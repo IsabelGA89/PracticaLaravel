@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="flex inline-flex mr-2" role="group">
-                    <input type="submit" name="Guardar" value="Guardar"
+                    <input type="submit" value="Guardar"
                        class="focus:outline-none text-white text-sm py-2.5 px-5 bg-green-500 rounded-l-md hover:bg-green-600 hover:shadow-lg">
                     </input>
 

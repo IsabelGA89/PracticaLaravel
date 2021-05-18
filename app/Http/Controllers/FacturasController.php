@@ -116,9 +116,9 @@ class FacturasController extends Controller
             $datosFactura = $request->except(['_token','_method']);
             facturas::where('id','=',$id)->update($datosFactura);
             $factura = facturas::findOrFail($id);
-            return view("facturas.edit",["factura"=>$factura])->with('success','Se ha actualizado el valor de la factura');
-            /*return redirect()->route("facturas.index")
-                ->with('success','Se ha actualizado el valor de la factura');*/
+            //return view("facturas.edit",["factura"=>$factura])->with('success','Se ha actualizado el valor de la factura');
+            return redirect()->route("facturas.index")
+                ->with('success','Se ha actualizado el valor de la factura');
         }
         catch(\Exception $e){
             return redirect()->route("facturas.index")
