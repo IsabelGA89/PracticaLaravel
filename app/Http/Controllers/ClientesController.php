@@ -74,9 +74,10 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clientes $clientes)
+    public function edit($id)
     {
-        //
+        $cliente = Clientes::findOrFail($id);
+        return view('clientes.edit',["cliente"=>$cliente]);
     }
 
     /**
@@ -86,9 +87,12 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clientes $clientes)
+    public function update(Request $request, $id)
     {
-        //
+        $datosCliente = request()->except(['_token','_method']);
+        Clientes::where('id','=',$id)->update($datosCliente);
+        $cliente = Clientes::findOrFail($id);
+        return view("facturas.edit",["cliente"=>$cliente])->with('success','Se han actualizado los datos del cliente');
     }
 
     /**
@@ -97,8 +101,10 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clientes $clientes)
+    public function destroy($id)
     {
-        //
+        Clientes::destroy($id);
+        return redirect()->route('clientes.index')
+            ->with('success',"El cliente $id se ha eliminado satisfactoriamente");
     }
 }

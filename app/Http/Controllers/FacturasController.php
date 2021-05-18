@@ -99,7 +99,8 @@ class FacturasController extends Controller
      * @param  \App\facturas  $facturas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, facturas $facturas)
+    //public function update(Request $request, facturas $facturas)
+    public function update(Request $request, $id)
     {
 
         $request->validate([
@@ -113,14 +114,15 @@ class FacturasController extends Controller
         try{
            /* $facturas->update($request->all());*/
             $datosFactura = request()->except(['_token','_method']);
-            facturas::where('id','=',$facturas)->update($datosFactura);
-            $factura = facturas::findOrFail($facturas);
-            return redirect()->route("facturas.index")
-                ->with('success','Se ha actualizado el valor de la factura');
+            facturas::where('id','=',$id)->update($datosFactura);
+            $factura = facturas::findOrFail($id);
+            return view("facturas.edit",["factura"=>$factura])->with('success','Se ha actualizado el valor de la factura');
+            /*return redirect()->route("facturas.index")
+                ->with('success','Se ha actualizado el valor de la factura');*/
         }
         catch(\Exception $e){
             return redirect()->route("facturas.index")
-                ->with('error','Se ha producido un error actualizando la factura.');
+                ->with('error',"Se ha producido un error actualizando la factura: $e");
         }
     }
 
@@ -130,14 +132,14 @@ class FacturasController extends Controller
      * @param  \App\facturas  $facturas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(facturas $facturas)
+    public function destroy($id)
     {
         try{
-            $fra_id = $facturas->id;
+
             //$facturas->delete();
-            facturas::destroy($facturas);
+            facturas::destroy($id);
             return redirect()->route('facturas.index')
-                ->with('success',"La factura $fra_id se ha eliminado satisfactoriamente");
+                ->with('success',"La factura $id se ha eliminado satisfactoriamente");
         }
         catch(\Exception $e){
             return redirect()->route('facturas.index')
