@@ -113,7 +113,7 @@ class FacturasController extends Controller
         ]);
         try{
            /* $facturas->update($request->all());*/
-            $datosFactura = request()->except(['_token','_method']);
+            $datosFactura = $request->except(['_token','_method']);
             facturas::where('id','=',$id)->update($datosFactura);
             $factura = facturas::findOrFail($id);
             return view("facturas.edit",["factura"=>$factura])->with('success','Se ha actualizado el valor de la factura');
