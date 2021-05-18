@@ -79,9 +79,11 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
-        //
+        $empleado = Empleado::findOrFail($id);
+        //dd($empleado);
+        return view('empleados.edit',["empleado"=>$empleado]);
     }
 
     /**
@@ -91,9 +93,19 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $datosEmpleado = request()->except(['_token','_method']);
+            Empleado::where('id','=',$id)->update($datosEmpleado);
+            $empleado = Empleado::findOrFail($id);
+            return view("empleados.edit",["empleado"=>$empleado])->with('success','Se ha actualizado el empleado');
+
+        }
+        catch(\Exception $e){
+            return redirect()->route("empleados.index")
+                ->with('error',"Se ha producido un error actualizando el empleado: $e");
+        }
     }
 
     /**
@@ -102,8 +114,16 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy($id)
     {
-        //
+        try{
+            Empleado::destroy($id);
+            return redirect()->route('empleados.index')
+                ->with('success',"El empleado $id se ha eliminado satisfactoriamente");
+        }
+        catch(\Exception $e){
+            return redirect()->route('empleados.index')
+                ->with('error',"El empleado no ha podido ser eliminado: $e");
+        }
     }
 }

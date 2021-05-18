@@ -73,9 +73,10 @@ class IdiomasController extends Controller
      * @param  \App\Idiomas  $idiomas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idiomas $idiomas)
+    public function edit($id)
     {
-        //
+        $idioma = Idiomas::findOrFail($id);
+        return view('idiomas.edit',["idioma"=>$idioma]);
     }
 
     /**
@@ -85,9 +86,20 @@ class IdiomasController extends Controller
      * @param  \App\Idiomas  $idiomas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idiomas $idiomas)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+
+            $datosIdioma = request()->except(['_token','_method']);
+            Idiomas::where('id','=',$id)->update($datosIdioma);
+            $idioma = Idiomas::findOrFail($id);
+            return view("idiomas.edit",["idioma"=>$idioma])->with('success','Se ha actualizado el idioma.');
+
+        }
+        catch(\Exception $e){
+            return redirect()->route("idiomas.index")
+                ->with('error',"Se ha producido un error actualizando el idioma: $e");
+        }
     }
 
     /**
@@ -96,8 +108,17 @@ class IdiomasController extends Controller
      * @param  \App\Idiomas  $idiomas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idiomas $idiomas)
+    public function destroy($id)
     {
-        //
+        try{
+            Idiomas::destroy($id);
+            return redirect()->route('idiomas.index')
+                ->with('success',"El idioma $id se ha eliminado satisfactoriamente");
+        }
+        catch(\Exception $e){
+            return redirect()->route('idiomas.index')
+                ->with('error',"El idioma no ha podido ser eliminado: $e");
+        }
+
     }
 }

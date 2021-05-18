@@ -143,7 +143,7 @@ class FacturasController extends Controller
         }
         catch(\Exception $e){
             return redirect()->route('facturas.index')
-                ->with('error','La factura no ha podido ser eliminada');
+                ->with('error',"La factura no ha podido ser eliminada: $e");
         }
 
     }

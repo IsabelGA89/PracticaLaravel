@@ -30,24 +30,16 @@
                 <td class="px-4 py-3">{{$idioma->codigo}}</td>
                 <td class="px-4 py-3 text-center">
                     <div class="inline-block mr-2 mt-2">
-                        <button type="button"
-                                class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400">
-                            Modificar
-                        </button>
+                        <form action="{{ route('idiomas.destroy', $idioma->id) }}" method="POST">
+                            <a class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-green-600 rounded-md bg-green-500 hover:bg-green-400"
+                               href="{{ route('idiomas.edit',$idioma->id) }}">Modificar</a>
+                            @csrf
+                            @method('DELETE')
+                            <button class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400"
+                                    type="submit"> Eliminar
+                            </button>
+                        </form>
                     </div>
-
-                    <div class="inline-block mr-2 mt-2">
-                        <button type="button"
-                                class="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-red-600 rounded-md bg-red-500 hover:bg-red-400">
-                            Eliminar
-                        </button>
-                    </div>
-                    {{--<form action="{{ route('facturas.destroy',$fra->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('facturas.edit',$fra->id) }}">Edit</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>--}}
                 </td>
             </tr>
     @endforeach
