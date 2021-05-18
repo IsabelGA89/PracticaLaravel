@@ -84,9 +84,12 @@ class FacturasController extends Controller
      * @param  \App\facturas  $facturas
      * @return \Illuminate\Http\Response
      */
-    public function edit(facturas $facturas)
+    //public function edit(facturas $facturas)
+    public function edit($id)
     {
-        return view('facturas.edit',compact('facturas'));
+        $factura = facturas::findOrFail($id);
+        //dd($factura);
+        return view('facturas.edit',["factura"=>$factura]);
     }
 
     /**
@@ -98,6 +101,7 @@ class FacturasController extends Controller
      */
     public function update(Request $request, facturas $facturas)
     {
+
         $request->validate([
             'empresa' => 'required',
             'producto' => 'required',
@@ -107,7 +111,10 @@ class FacturasController extends Controller
 
         ]);
         try{
-            $facturas->update($request->all());
+           /* $facturas->update($request->all());*/
+            $datosFactura = request()->except(['_token','_method']);
+            facturas::where('id','=',$facturas)->update($datosFactura);
+            $factura = facturas::findOrFail($facturas);
             return redirect()->route("facturas.index")
                 ->with('success','Se ha actualizado el valor de la factura');
         }
@@ -127,7 +134,8 @@ class FacturasController extends Controller
     {
         try{
             $fra_id = $facturas->id;
-            $facturas->delete();
+            //$facturas->delete();
+            facturas::destroy($facturas);
             return redirect()->route('facturas.index')
                 ->with('success',"La factura $fra_id se ha eliminado satisfactoriamente");
         }

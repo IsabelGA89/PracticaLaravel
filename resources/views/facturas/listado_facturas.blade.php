@@ -4,4 +4,4 @@
 
 @section("contenido")
     @include('facturas.partials.lista_facturas')
-@stop
+@endsection
